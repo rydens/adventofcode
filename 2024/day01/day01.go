@@ -14,12 +14,15 @@ var l1, l2 []int
 
 func main() {
 	file := aoc.Noe(os.Open("./input.txt"))
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		strs := strings.Split(scanner.Text(), "   ")
 		l1 = append(l1, aoc.Noe(strconv.Atoi(strs[0])))
 		l2 = append(l2, aoc.Noe(strconv.Atoi(strs[1])))
 	}
+
 	slices.Sort(l1)
 	slices.Sort(l2)
 
