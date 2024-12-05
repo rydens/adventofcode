@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"slices"
-	"strconv"
 	"strings"
 )
 
@@ -19,29 +18,29 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		strs := strings.Split(scanner.Text(), "   ")
-		l1 = append(l1, aoc.Noe(strconv.Atoi(strs[0])))
-		l2 = append(l2, aoc.Noe(strconv.Atoi(strs[1])))
+		l1 = append(l1, aoc.Atoi(strs[0]))
+		l2 = append(l2, aoc.Atoi(strs[1]))
 	}
 
 	slices.Sort(l1)
 	slices.Sort(l2)
 
-	part1()
-	part2()
+	fmt.Println(part1())
+	fmt.Println(part2())
 }
 
-func part1() {
+func part1() int {
 	sum := 0
 	for i := 0; i < len(l1); i++ {
 		sum += aoc.Abs(l1[i] - l2[i])
 	}
-	fmt.Println(sum)
+	return sum
 }
 
-func part2() {
+func part2() int {
 	sum := 0
 	for _, num := range l1 {
 		sum += num * aoc.Count(l2, func(j int) bool { return j == num })
 	}
-	fmt.Println(sum)
+	return sum
 }
